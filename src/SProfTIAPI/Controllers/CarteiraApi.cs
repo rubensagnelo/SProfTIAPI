@@ -67,7 +67,7 @@ namespace SProfTIAPI.Controllers
         /// <param name="registros">quantidades de registros</param>
         /// <response code="200">resultados da consulta</response>
         /// <response code="400">valor do parametro inválido</response>
-        [Authorize]
+        //[Authorize]
         [HttpGet]
         [Route("/rubensagnelo/sprotiapi/1.0.0/carteira")]
         [ValidateModelState]
@@ -81,6 +81,7 @@ namespace SProfTIAPI.Controllers
             //TODO: Uncomment the next line to return response 400 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
             // return StatusCode(400);
             string exampleJson = null;
+
             exampleJson = "[ {\n  \"descrcricao\" : \"Desenvolvedores Android iniciante (trainee)\",\n  \"idcarteira\" : 123,\n  \"titulo\" : \"Desenvolvedor Android 4\",\n  \"dataatualizaco\" : \"2016-08-29T09:12:33.001Z\"\n}, {\n  \"descrcricao\" : \"Desenvolvedores Android iniciante (trainee)\",\n  \"idcarteira\" : 123,\n  \"titulo\" : \"Desenvolvedor Android 4\",\n  \"dataatualizaco\" : \"2016-08-29T09:12:33.001Z\"\n} ]";
             
                         var example = exampleJson != null

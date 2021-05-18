@@ -5,13 +5,18 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using idbmongo;
+using Microsoft.Extensions.Configuration;
+using System.Diagnostics;
 
 namespace dbmongo
 {
 
     public class MongoDatabase<T> : IDatabase<T> where T : class, new()
         {
-            private static string connectionString = "connectionString";
+            //var configuration = new Configuration();
+            //configuration.Get("MongoDbSettings").AppSettings["ConnectionString"];
+
+            private static string connectionString =  "mongodb+srv://rubensagnelo:pitado75@cluster0.wvsyy.mongodb.net/DB1?retryWrites=true&w=majority";
 
             private static IMongoClient server = new MongoClient(connectionString);
 
