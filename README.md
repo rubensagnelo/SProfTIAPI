@@ -1,4 +1,4 @@
-# SProfTIAPI - ASP.NET Core 2.0 Server
+# SProfTIAPI - ASP.NET Core 3.1 Server
 
 Seletor de Profissinais de TI API
 
