@@ -16,7 +16,7 @@ namespace dbmongo
             //var configuration = new Configuration();
             //configuration.Get("MongoDbSettings").AppSettings["ConnectionString"];
 
-            private static string connectionString =  "mongodb+srv://rubensagnelo:pitado75@cluster0.wvsyy.mongodb.net/DB1?retryWrites=true&w=majority";
+            private static string connectionString =  "mongodb+srv://usuario1:R7HgJfxrUv2LR2T@cluster0.wvsyy.mongodb.net/DB1?retryWrites=true&w=majority";
 
             private static IMongoClient server = new MongoClient(connectionString);
 
@@ -59,6 +59,14 @@ namespace dbmongo
             {
                 return Collection.Find(expression).SingleOrDefault();
             }
+
+
+            public List<T> GetList(Expression<Func<T, bool>> expression)
+            {
+                return Collection.Find(expression).ToList<T>();
+            }
+
+
 
             public T FindOneAndUpdate(Expression<Func<T, bool>> expression, UpdateDefinition<T> update, FindOneAndUpdateOptions<T> option)
             {

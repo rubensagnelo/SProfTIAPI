@@ -49,7 +49,7 @@ namespace SProfTIAPI.Models
         /// <summary>
         /// Gets or Sets Dataatualizaco
         /// </summary>
-        [DataMember(Name="dataatualizaco")]
+        [DataMember(Name="dataatualizacao")]
         public DateTime? Dataatualizaco { get; set; }
 
         /// <summary>

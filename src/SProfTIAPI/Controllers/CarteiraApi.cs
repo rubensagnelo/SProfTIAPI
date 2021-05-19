@@ -42,21 +42,9 @@ namespace SProfTIAPI.Controllers
         [SwaggerResponse(statusCode: 201, type: typeof(CarteiraItemresponse), description: "carteira incluida")]
         public virtual IActionResult AddCarteira([FromBody]CarteiraItem body)
         { 
-            //TODO: Uncomment the next line to return response 201 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(201, default(CarteiraItemresponse));
-
-            //TODO: Uncomment the next line to return response 400 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(400);
-
-            //TODO: Uncomment the next line to return response 409 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(409);
-            string exampleJson = null;
-            exampleJson = "{\n  \"idcarteira\" : 123\n}";
-            
-                        var example = exampleJson != null
-                        ? JsonConvert.DeserializeObject<CarteiraItemresponse>(exampleJson)
-                        : default(CarteiraItemresponse);            //TODO: Change the data returned
-            return new ObjectResult(example);
+            var rspStc = Services.CarteiraService.Add(body);
+            CarteiraItemresponse objResp = new CarteiraItemresponse(){Idcarteira=body.Idcarteira};
+            return StatusCode(rspStc, objResp);
         }
 
         /// <summary>
@@ -80,14 +68,10 @@ namespace SProfTIAPI.Controllers
 
             //TODO: Uncomment the next line to return response 400 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
             // return StatusCode(400);
-            string exampleJson = null;
 
-            exampleJson = "[ {\n  \"descrcricao\" : \"Desenvolvedores Android iniciante (trainee)\",\n  \"idcarteira\" : 123,\n  \"titulo\" : \"Desenvolvedor Android 4\",\n  \"dataatualizaco\" : \"2016-08-29T09:12:33.001Z\"\n}, {\n  \"descrcricao\" : \"Desenvolvedores Android iniciante (trainee)\",\n  \"idcarteira\" : 123,\n  \"titulo\" : \"Desenvolvedor Android 4\",\n  \"dataatualizaco\" : \"2016-08-29T09:12:33.001Z\"\n} ]";
-            
-                        var example = exampleJson != null
-                        ? JsonConvert.DeserializeObject<List<CarteiraItem>>(exampleJson)
-                        : default(List<CarteiraItem>);            //TODO: Change the data returned
-            return new ObjectResult(example);
+            int rspStc = 0;
+            List<CarteiraItem> objResp = Services.CarteiraService.Get(out rspStc,nome);
+            return StatusCode(rspStc, objResp);
         }
 
         /// <summary>
