@@ -63,12 +63,6 @@ namespace SProfTIAPI.Controllers
         [SwaggerResponse(statusCode: 200, type: typeof(List<CarteiraItem>), description: "resultados da consulta")]
         public virtual IActionResult BuscarTodasAsCarteiraDeProfissionais([FromQuery]string nome, [FromQuery]int? registros)
         { 
-            //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(200, default(List<CarteiraItem>));
-
-            //TODO: Uncomment the next line to return response 400 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(400);
-
             int rspStc = 0;
             List<CarteiraItem> objResp = Services.CarteiraService.Get(out rspStc,nome);
             return StatusCode(rspStc, objResp);
@@ -79,7 +73,7 @@ namespace SProfTIAPI.Controllers
         /// </summary>
         /// <remarks>Exclui uma carteira pelo Identificador da carteira</remarks>
         /// <param name="idcarteira"></param>
-        /// <response code="204">carteira excluída</response>
+        /// <response code="202">carteira excluída</response>
         /// <response code="400">id da carteira inálida</response>
         /// <response code="404">carteira nao encontrada</response>
         [HttpDelete]
@@ -88,17 +82,10 @@ namespace SProfTIAPI.Controllers
         [SwaggerOperation("CarteiraIdcarteiraDelete")]
         public virtual IActionResult CarteiraIdcarteiraDelete([FromRoute][Required]int? idcarteira)
         { 
-            //TODO: Uncomment the next line to return response 204 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(204);
-
-            //TODO: Uncomment the next line to return response 400 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(400);
-
-            //TODO: Uncomment the next line to return response 404 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(404);
-
-            throw new NotImplementedException();
-        }
+            int rspStc = 0;
+            Services.CarteiraService.Del(out rspStc, idcarteira);
+            return StatusCode(rspStc);
+       }
 
         /// <summary>
         /// Consulta uma carteira de selecao de profissionais pelo identificador da carteira
@@ -114,18 +101,10 @@ namespace SProfTIAPI.Controllers
         [SwaggerResponse(statusCode: 200, type: typeof(CarteiraItem), description: "resultados da consulta")]
         public virtual IActionResult CarteiraIdcarteiraGet([FromRoute][Required]int? idcarteira)
         { 
-            //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(200, default(CarteiraItem));
 
-            //TODO: Uncomment the next line to return response 400 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(400);
-            string exampleJson = null;
-            exampleJson = "{\n  \"descrcricao\" : \"Desenvolvedores Android iniciante (trainee)\",\n  \"idcarteira\" : 123,\n  \"titulo\" : \"Desenvolvedor Android 4\",\n  \"dataatualizaco\" : \"2016-08-29T09:12:33.001Z\"\n}";
-            
-                        var example = exampleJson != null
-                        ? JsonConvert.DeserializeObject<CarteiraItem>(exampleJson)
-                        : default(CarteiraItem);            //TODO: Change the data returned
-            return new ObjectResult(example);
+            int rspStc = 0;
+            CarteiraItem objResp = Services.CarteiraService.GetById(out rspStc, idcarteira);
+            return StatusCode(rspStc, objResp);
         }
 
         /// <summary>
@@ -142,16 +121,9 @@ namespace SProfTIAPI.Controllers
         [SwaggerOperation("CarteiraIdcarteiraPut")]
         public virtual IActionResult CarteiraIdcarteiraPut([FromRoute][Required]int? idcarteira, [FromBody]CarteiraItem body)
         { 
-            //TODO: Uncomment the next line to return response 400 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(400);
-
-            //TODO: Uncomment the next line to return response 404 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(404);
-
-            //TODO: Uncomment the next line to return response 405 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(405);
-
-            throw new NotImplementedException();
+            var rspStc = Services.CarteiraService.Update(idcarteira ,body);
+            CarteiraItemresponse objResp = new CarteiraItemresponse(){Idcarteira=body.Idcarteira};
+            return StatusCode(rspStc, objResp);
         }
     }
 }
