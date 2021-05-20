@@ -43,9 +43,18 @@ namespace SProfTIAPI.Controllers
         [SwaggerResponse(statusCode: 200, type: typeof(Usuarioplataformaitem), description: "resultados da consulta")]
         public virtual IActionResult Buscarusuariopnaplataforma([FromRoute][Required]int idplataforma, [FromRoute][Required]int? idUsuarioplataforma)
         { 
-            int rspStc = 0;
-            Usuarioplataformaitem objResp = UsuarioPlataformaService.GetUser(idUsuarioplataforma, (enums.enmPlataforma)idplataforma);
-            return StatusCode(rspStc, objResp);
+            //int rspStc = 0;
+            //Usuarioplataforma objResp = UsuarioPlataformaService.GetUser(idUsuarioplataforma, (enums.enmPlataforma)idplataforma);
+            //return StatusCode(rspStc, objResp);
+            string exampleJson = null;
+            exampleJson = "[ {\n  \"idusuarioplatafaorma\" : \"12345\",\n  \"idplataforma\" : 123,\n  \"nome\" : \"João da Silva\",\n  \"avatar\" : \"https://github.com/images/error/octocat_happy.gif\",\n  \"reputacao\" : 2041,\n  \"email\" : \"octocat@github.com\"\n}, {\n  \"idusuarioplatafaorma\" : \"12345\",\n  \"idplataforma\" : 123,\n  \"nome\" : \"João da Silva\",\n  \"avatar\" : \"https://github.com/images/error/octocat_happy.gif\",\n  \"reputacao\" : 2041,\n  \"email\" : \"octocat@github.com\"\n} ]";
+            
+                        var example = exampleJson != null
+                        ? JsonConvert.DeserializeObject<List<Usuarioplataformaitem>>(exampleJson)
+                        : default(List<Usuarioplataformaitem>);            //TODO: Change the data returned
+            return new ObjectResult(example);
+
+
         }
 
         /// <summary>
