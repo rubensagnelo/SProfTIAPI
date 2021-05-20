@@ -52,6 +52,8 @@ namespace SProfTIAPI.Entities
         /// <value>valor resultante de formula que cruza alguns dados do usuários nas respectivas plataformas</value>
          public int? Reputacao { get; set; }
 
+         public string localizacao { get; set; }
+
  
     }
 }

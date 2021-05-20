@@ -17,7 +17,7 @@ namespace SProfTIAPI.Services
     
     public class CarteiraService {
 
-        private static dbmongo.MongoDatabase<SProfTIAPI.Entities.Carteira> cr = new dbmongo.MongoDatabase<Entities.Carteira>("CARTEIRA");
+        private static dbmongo.MongoDatabase<SProfTIAPI.Entities.Carteira> cr = new dbmongo.MongoDatabase<Entities.Carteira>("SProfTIAPI.CARTEIRA");
 
         public static List<CarteiraItem> Get(out int errcode, string TituloCarteira=""){
 

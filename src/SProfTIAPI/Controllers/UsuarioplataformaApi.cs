@@ -18,6 +18,7 @@ using SProfTIAPI.Attributes;
 
 using Microsoft.AspNetCore.Authorization;
 using SProfTIAPI.Models;
+using SProfTIAPI.Services;
 
 namespace SProfTIAPI.Controllers
 { 
@@ -40,20 +41,11 @@ namespace SProfTIAPI.Controllers
         [ValidateModelState]
         [SwaggerOperation("Buscarusuariopnaplataforma")]
         [SwaggerResponse(statusCode: 200, type: typeof(Usuarioplataformaitem), description: "resultados da consulta")]
-        public virtual IActionResult Buscarusuariopnaplataforma([FromRoute][Required]string idplataforma, [FromRoute][Required]int? idUsuarioplataforma)
+        public virtual IActionResult Buscarusuariopnaplataforma([FromRoute][Required]int idplataforma, [FromRoute][Required]int? idUsuarioplataforma)
         { 
-            //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(200, default(Usuarioplataformaitem));
-
-            //TODO: Uncomment the next line to return response 400 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(400);
-            string exampleJson = null;
-            exampleJson = "{\n  \"idusuarioplatafaorma\" : \"12345\",\n  \"idplataforma\" : 123,\n  \"nome\" : \"João da Silva\",\n  \"avatar\" : \"https://github.com/images/error/octocat_happy.gif\",\n  \"reputacao\" : 2041,\n  \"email\" : \"octocat@github.com\"\n}";
-            
-                        var example = exampleJson != null
-                        ? JsonConvert.DeserializeObject<Usuarioplataformaitem>(exampleJson)
-                        : default(Usuarioplataformaitem);            //TODO: Change the data returned
-            return new ObjectResult(example);
+            int rspStc = 0;
+            Usuarioplataformaitem objResp = UsuarioPlataformaService.GetUser(idUsuarioplataforma, (enums.enmPlataforma)idplataforma);
+            return StatusCode(rspStc, objResp);
         }
 
         /// <summary>

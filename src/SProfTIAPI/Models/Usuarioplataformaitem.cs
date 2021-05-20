@@ -71,6 +71,8 @@ namespace SProfTIAPI.Models
         [DataMember(Name="reputacao")]
         public int? Reputacao { get; set; }
 
+        public string localizacao  { get; set; }
+
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
