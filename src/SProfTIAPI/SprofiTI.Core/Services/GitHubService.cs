@@ -19,9 +19,9 @@ namespace SProfTIAPI.Services
     public class GitHubService
 {
 
-        public static List<Usuarioplataformaitem> GetUsers(int? IdIni, int? Pagina, enums.enmPlataforma plataforma)
+        public static List<Usuarioplataforma> GetUsers(int? IdIni, int? Pagina)
         {
-            List<Usuarioplataformaitem> result = new List<Usuarioplataformaitem>();
+            List<Usuarioplataforma> result = new List<Usuarioplataforma>();
             GitHubRootUser[] usersRoot = WebAPIProxy.Get<GitHubRootUser[]>("https://api.github.com/users?since="+IdIni.ToString()+"&per_page="+Pagina.ToString());
 
             foreach (var item in usersRoot)
@@ -29,7 +29,7 @@ namespace SProfTIAPI.Services
 
                 GitHubUserDetail userdetail = WebAPIProxy.Get<GitHubUserDetail>(item.url);
 
-                Usuarioplataformaitem usr = new Usuarioplataformaitem(){
+                Usuarioplataforma usr = new Usuarioplataforma(){
                             Nome = userdetail.name,
                             Email = userdetail.email.ToString(),
                             Idplataforma = (int)enums.enmPlataforma.github,
@@ -48,11 +48,11 @@ namespace SProfTIAPI.Services
         }
 
 
-        public static Usuarioplataformaitem GetUser(int? Id)
+        public static Usuarioplataforma GetUser(int? Id)
         {
                  GitHubUserDetail userdetail = WebAPIProxy.Get<GitHubUserDetail>("https://api.github.com/users/"+Id.ToString());
 
-                Usuarioplataformaitem result = new Usuarioplataformaitem(){
+                Usuarioplataforma result = new Usuarioplataforma(){
                             Nome = userdetail.name,
                             Email = userdetail.email.ToString(),
                             Idplataforma = (int)enums.enmPlataforma.github,

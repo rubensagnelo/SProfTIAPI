@@ -14,7 +14,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace SProfTIAPI.Entities
 { 
-       public partial class Usuarioplataformaitem 
+       public partial class Usuarioplataforma
     { 
         /// <summary>
         /// Identificado do usuário na plataforma retornado pela API da plataforma
