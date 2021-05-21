@@ -80,7 +80,10 @@ namespace SProfTIAPI
 */
 
             services.AddCors();
-
+            services.AddControllers();
+            // configure strongly typed settings object    
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+            services.AddScoped<IUserService, UserService>();
 
 
             // Add framework services.
@@ -124,7 +127,7 @@ namespace SProfTIAPI
                     c.OperationFilter<GeneratePathParamsValidationFilter>();
                 });
 
-                services.AddScoped<IUserService, UserService>();
+
         }
 
         /// <summary>
@@ -176,6 +179,7 @@ namespace SProfTIAPI
 
                 app.UseHsts();
             }
+            app.UseMiddleware<JwtMiddleware>();
 
             app.UseAuthentication();
         }

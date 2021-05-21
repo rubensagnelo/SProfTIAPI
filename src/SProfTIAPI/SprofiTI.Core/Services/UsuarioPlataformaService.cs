@@ -12,23 +12,40 @@ namespace SProfTIAPI.Services
 
         public static List<Usuarioplataforma> GetUsers(int? IdIni, int? Pagina, enums.enmPlataforma plataforma)
         {
-            if (plataforma == enums.enmPlataforma.github)    
-                return GitHubService.GetUsers(IdIni,Pagina) ;
-            else if (plataforma == enums.enmPlataforma.stackoverflow)
-                return new List<Usuarioplataforma>();//TODO: Implementar plataforma stackoverflow
+            List<Usuarioplataforma> result = new List<Usuarioplataforma>();
+            try
+            {
+                if (IdIni==null || IdIni==0) IdIni=1;
+                if (Pagina==null || Pagina==0) Pagina=10;
+
+                if (plataforma == enums.enmPlataforma.github)    
+                    result = GitHubService.GetUsers(IdIni,Pagina) ;
+                else if (plataforma == enums.enmPlataforma.stackoverflow)
+                    result = new List<Usuarioplataforma>();//TODO: Implementar plataforma stackoverflow
+            }
+            catch (System.Exception ex)
+            {
+            }
+            return result;
         }
 
 
         public static Usuarioplataforma GetUser(int? Id, enums.enmPlataforma plataforma)
         {
-            if (plataforma == enums.enmPlataforma.github)    
-                return SProfTIAPI.Services.GitHubService.GetUser(Id);
-            else if (plataforma == enums.enmPlataforma.stackoverflow)
-                return new Usuarioplataforma();//TODO: Implementar plataforma stackoverflow
+            Usuarioplataforma result = new Usuarioplataforma();
+            try
+            {
+                if (plataforma == enums.enmPlataforma.github)    
+                    result = SProfTIAPI.Services.GitHubService.GetUser(Id);
+                else if (plataforma == enums.enmPlataforma.stackoverflow)
+                    result = new Usuarioplataforma();//TODO: Implementar plataforma stackoverflow
+            }
+            catch (System.Exception ex)
+            {
+            }
+            return result;
+
         }
-
-
-
 
     }
 

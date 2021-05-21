@@ -24,6 +24,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using System.Security.Claims;
+using SProfTIAPI.Helpers;
+using SProfTIAPI.Entities;
 
 namespace SProfTIAPI.Controllers
 { 
@@ -32,15 +35,20 @@ namespace SProfTIAPI.Controllers
     [ApiController]
     public class autenticacao : ControllerBase
     { 
+
+        private readonly AppSettings _appSettings;
+
+
        
         [HttpPost]
-        [Route("/rubensagnelo/sprotiapi/1.0.0/autenticacao")]
+        [Route("/rubensagnelo/sprotiapi/1.0.0/login")]
         public virtual IActionResult login([FromBody]Usuario loginDetalhes)
         { 
                bool resultado = ValidarUsuario(loginDetalhes);
             if (resultado)
             {
-                var tokenString = GerarTokenJWT();
+                User User = new User { Id = 1, FirstName = "Test", LastName = "User", Username = "test", Password = "test" };
+                var tokenString =  generateJwtToken(User); // GerarTokenJWT();
                 return Ok(new { token = tokenString });
             }
             else
@@ -57,18 +65,43 @@ namespace SProfTIAPI.Controllers
             _config = Configuration;
         }
 
+/*
         private string GerarTokenJWT()
-                {
-                    var issuer = _config["Jwt:Issuer"];
-                    var audience = _config["Jwt:Audience"];
-                    var expiry = DateTime.Now.AddMinutes(120);
-                    var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
-                    var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-                    var token = new JwtSecurityToken(issuer: issuer,audience: audience, expires: DateTime.Now.AddMinutes(120),signingCredentials: credentials);
-                    var tokenHandler = new JwtSecurityTokenHandler();
-                    var stringToken = tokenHandler.WriteToken(token);
-                    return stringToken;
-                }
+        {
+            var issuer = _config["Jwt:Issuer"];
+            var audience = _config["Jwt:Audience"];
+            var expiry = DateTime.Now.AddMinutes(120);
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+            var token = new JwtSecurityToken(issuer: issuer,audience: audience, expires: DateTime.Now.AddMinutes(120),signingCredentials: credentials);
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var stringToken = tokenHandler.WriteToken(token);
+            return stringToken;
+        }
+*/
+
+/*
+        public UserService(IOptions<AppSettings> appSettings)
+        {
+            _appSettings = appSettings.Value;
+        }
+*/
+
+        private string generateJwtToken(User user)
+        {
+            // generate token that is valid for 7 days
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[] { new Claim("id", user.Id.ToString()) }),
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
+        }
+
 
         private bool ValidarUsuario(Usuario loginDetalhes)
         {
@@ -78,7 +111,7 @@ namespace SProfTIAPI.Controllers
             }
             else
             {
-                return false;
+                return true;
             }
         }        
 

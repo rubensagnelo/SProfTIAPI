@@ -19,6 +19,7 @@ using SProfTIAPI.Attributes;
 using Microsoft.AspNetCore.Authorization;
 using SProfTIAPI.Models;
 using SProfTIAPI.Services;
+using SProfTIAPI.Entities;
 
 namespace SProfTIAPI.Controllers
 { 
@@ -43,18 +44,9 @@ namespace SProfTIAPI.Controllers
         [SwaggerResponse(statusCode: 200, type: typeof(Usuarioplataformaitem), description: "resultados da consulta")]
         public virtual IActionResult Buscarusuariopnaplataforma([FromRoute][Required]int idplataforma, [FromRoute][Required]int? idUsuarioplataforma)
         { 
-            //int rspStc = 0;
-            //Usuarioplataforma objResp = UsuarioPlataformaService.GetUser(idUsuarioplataforma, (enums.enmPlataforma)idplataforma);
-            //return StatusCode(rspStc, objResp);
-            string exampleJson = null;
-            exampleJson = "[ {\n  \"idusuarioplatafaorma\" : \"12345\",\n  \"idplataforma\" : 123,\n  \"nome\" : \"João da Silva\",\n  \"avatar\" : \"https://github.com/images/error/octocat_happy.gif\",\n  \"reputacao\" : 2041,\n  \"email\" : \"octocat@github.com\"\n}, {\n  \"idusuarioplatafaorma\" : \"12345\",\n  \"idplataforma\" : 123,\n  \"nome\" : \"João da Silva\",\n  \"avatar\" : \"https://github.com/images/error/octocat_happy.gif\",\n  \"reputacao\" : 2041,\n  \"email\" : \"octocat@github.com\"\n} ]";
-            
-                        var example = exampleJson != null
-                        ? JsonConvert.DeserializeObject<List<Usuarioplataformaitem>>(exampleJson)
-                        : default(List<Usuarioplataformaitem>);            //TODO: Change the data returned
-            return new ObjectResult(example);
-
-
+            int rspStc = 200;
+            Usuarioplataforma objResp = UsuarioPlataformaService.GetUser(idUsuarioplataforma, (enums.enmPlataforma)idplataforma);
+            return StatusCode(rspStc, objResp);
         }
 
         /// <summary>
@@ -69,13 +61,19 @@ namespace SProfTIAPI.Controllers
         [ValidateModelState]
         [SwaggerOperation("UsuarioplataformaIdplataformaGet")]
         [SwaggerResponse(statusCode: 200, type: typeof(List<Usuarioplataformaitem>), description: "resultados da consulta")]
-        public virtual IActionResult UsuarioplataformaIdplataformaGet([FromRoute][Required]int? idplataforma)
+        public virtual IActionResult UsuarioplataformaIdplataformaGet([FromRoute][Required]int idplataforma,[FromRoute]int IDini,[FromRoute]int? numPaginas)
         { 
             //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
             // return StatusCode(200, default(List<Usuarioplataformaitem>));
 
             //TODO: Uncomment the next line to return response 400 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
             // return StatusCode(400);
+            int rspStc = 200;
+            List<Usuarioplataforma> objResp = UsuarioPlataformaService.GetUsers(IDini, numPaginas, (enums.enmPlataforma)idplataforma );
+            return StatusCode(rspStc, objResp);
+
+
+            /*
             string exampleJson = null;
             exampleJson = "[ {\n  \"idusuarioplatafaorma\" : \"12345\",\n  \"idplataforma\" : 123,\n  \"nome\" : \"João da Silva\",\n  \"avatar\" : \"https://github.com/images/error/octocat_happy.gif\",\n  \"reputacao\" : 2041,\n  \"email\" : \"octocat@github.com\"\n}, {\n  \"idusuarioplatafaorma\" : \"12345\",\n  \"idplataforma\" : 123,\n  \"nome\" : \"João da Silva\",\n  \"avatar\" : \"https://github.com/images/error/octocat_happy.gif\",\n  \"reputacao\" : 2041,\n  \"email\" : \"octocat@github.com\"\n} ]";
             
@@ -83,6 +81,9 @@ namespace SProfTIAPI.Controllers
                         ? JsonConvert.DeserializeObject<List<Usuarioplataformaitem>>(exampleJson)
                         : default(List<Usuarioplataformaitem>);            //TODO: Change the data returned
             return new ObjectResult(example);
+            */
+
+
         }
     }
 }

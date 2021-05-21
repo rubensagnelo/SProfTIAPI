@@ -22,12 +22,12 @@ namespace SProfTIAPI.Services
             public static List<Usuarioplataforma> GetUsers(int? IdIni, int? Pagina)
             {
                 List<Usuarioplataforma> result = new List<Usuarioplataforma>();
-                GitHubRootUser[] usersRoot = WebAPIProxy.Get<GitHubRootUser[]>("https://api.github.com/users?since="+IdIni.ToString()+"&per_page="+Pagina.ToString());
+                GitHubRootUser[] usersRoot = WebAPIProxy.GetWC<GitHubRootUser[]>("https://api.github.com/users?since="+IdIni.ToString()+"&per_page="+Pagina.ToString());
 
                 foreach (var item in usersRoot)
                 {
 
-                    GitHubUserDetail userdetail = WebAPIProxy.Get<GitHubUserDetail>(item.url);
+                    GitHubUserDetail userdetail = WebAPIProxy.GetWC<GitHubUserDetail>(item.url);
 
                     Usuarioplataforma usr = new Usuarioplataforma(){
                                 Nome = userdetail.name,
@@ -50,7 +50,7 @@ namespace SProfTIAPI.Services
 
             public static Usuarioplataforma GetUser(int? Id)
             {
-                    GitHubUserDetail userdetail = WebAPIProxy.Get<GitHubUserDetail>("https://api.github.com/users/"+Id.ToString());
+                    GitHubUserDetail userdetail = WebAPIProxy.GetWC<GitHubUserDetail>("https://api.github.com/users/"+Id.ToString());
 
                     Usuarioplataforma result = new Usuarioplataforma(){
                                 Nome = userdetail.name,

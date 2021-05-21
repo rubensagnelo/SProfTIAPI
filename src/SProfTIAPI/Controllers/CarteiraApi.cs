@@ -36,6 +36,7 @@ namespace SProfTIAPI.Controllers
         /// <response code="400">parametro ou estrutura de entrada inálida</response>
         /// <response code="409">carteira já existente (nome da carteira ja existe)</response>
         [HttpPost]
+        [Authorize]
         [Route("/rubensagnelo/sprotiapi/1.0.0/carteira")]
         [ValidateModelState]
         [SwaggerOperation("AddCarteira")]
@@ -77,6 +78,7 @@ namespace SProfTIAPI.Controllers
         /// <response code="400">id da carteira inálida</response>
         /// <response code="404">carteira nao encontrada</response>
         [HttpDelete]
+        [Authorize]
         [Route("/rubensagnelo/sprotiapi/1.0.0/carteira/{idcarteira}")]
         [ValidateModelState]
         [SwaggerOperation("CarteiraIdcarteiraDelete")]
@@ -116,6 +118,7 @@ namespace SProfTIAPI.Controllers
         /// <response code="404">carteira nao encontrada</response>
         /// <response code="405">Exceção na autalização dos dados da carteira</response>
         [HttpPut]
+        [Authorize]
         [Route("/rubensagnelo/sprotiapi/1.0.0/carteira/{idcarteira}")]
         [ValidateModelState]
         [SwaggerOperation("CarteiraIdcarteiraPut")]
