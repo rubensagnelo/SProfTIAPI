@@ -5,5 +5,7 @@
 dotnet clean  src\SProfTIAPI
 dotnet restore src\SProfTIAPI
 dotnet build src\SProfTIAPI
+cd src\SProfTIAPI
+dotnet publish -c Release -o out
 echo Now, run the following to start the project: dotnet run -p src\SProfTIAPI\SProfTIAPI.csproj --launch-profile web.
 echo.
