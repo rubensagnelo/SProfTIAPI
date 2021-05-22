@@ -1,6 +1,7 @@
-# SProfTIAPI - ASP.NET Core 3.1 Server
+# SProfTIAPI - Seletor de Profissinais de TI API
+# ASP.NET Core 3.1 Server
 
-Seletor de Profissinais de TI API
+
 
 Para deploy/execução da Aplicação seguir os seguites paços.
 
