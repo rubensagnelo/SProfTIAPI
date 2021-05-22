@@ -11,10 +11,10 @@ Para deploy/execução da Aplicação seguir os seguites paços.
 >> Executar a Aplicação a pelo prompt de comando
 - Clonar a solução do GitHub ou extrair o zip recebido.
 - Abrir solução no VS Code. Deverá ser aberta na pasta "raiz" onde foi extraida a solução clonada
-- Executar o arquivo buildandRun.bat ou os seguintes comandos a partir da pasta SprofTIAPI\
-dotnet clean  src\SProfTIAPI
-dotnet restore src\SProfTIAPI 
-dotnet build src\SProfTIAPI
+- Executar o arquivo buildandRun.bat ou os seguintes comandos a partir da pasta SprofTIAPI\src\SProfTIAPI
+dotnet clean  
+dotnet restore  
+dotnet build 
 cd src\SProfTIAPI
 dotnet run
 
@@ -26,11 +26,11 @@ Obs:O tempo de expiração está valido para 120 seg após a geração do token 
 Para utilização das chamadas de api a partir do postman o token gerado deve ser postado no campo token após selecionar a aba Autorization e valorar o campo Type para "Bearer Token"
 
 >> Geração do deploy
-- Executar o arquivo dep.bat no prompt ou os seguintes comandos:
-    dotnet clean  src\SProfTIAPI
-    dotnet restore src\SProfTIAPI
-    dotnet build src\SProfTIAPI
-    cd src\SProfTIAPI
+- Executar o arquivo dep.bat no prompt ou os seguintes comandos, a partir da pasta SprofTIAPI\src\SProfTIAPI :
+    dotnet clean  
+    dotnet restore 
+    dotnet build 
+    cd src
     dotnet publish -c Release -o out
 
     - Para executar a aplicação do deploy executar, na pasta src\SProfTIAPI\out (ou onde será copiado o conteudo dessa pasta) deve-se executar o seguinte comando no prompt: 
