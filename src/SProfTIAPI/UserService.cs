@@ -24,13 +24,14 @@ namespace SProfTIAPI.Services
         private List<User> _users = new List<User>
         {
             new User {Username = "test", Password = "test" }
+            
         };
 
         private readonly AppSettings _appSettings;
 
         public UserService(IOptions<AppSettings> appSettings)
         {
-            _appSettings = appSettings.Value;
+            _appSettings = appSettings.Value; 
         }
 
         public AuthenticateResponse Authenticate(AuthenticateRequest model)

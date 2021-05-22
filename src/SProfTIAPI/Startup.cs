@@ -180,8 +180,9 @@ namespace SProfTIAPI
                 app.UseHsts();
             }
             app.UseMiddleware<JwtMiddleware>();
+            
 
-            app.UseAuthentication();
+            app.UseAuthentication(); 
         }
     }
 }

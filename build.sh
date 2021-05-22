@@ -5,4 +5,5 @@
 
 dotnet restore src/SProfTIAPI/ && \
     dotnet build src/SProfTIAPI/ && \
-    echo "Now, run the following to start the project: dotnet run -p src/SProfTIAPI/SProfTIAPI.csproj --launch-profile web"
+    echo "Now, run the following to start the project: dotnet run -p src/SProfTIAPI/SProfTIAPI.csproj --launch-profile web" 
+    

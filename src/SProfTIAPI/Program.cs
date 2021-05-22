@@ -22,8 +22,9 @@ namespace SProfTIAPI
         /// </summary>
         /// <param name="args"></param>
         /// <returns>IWebHostBuilder</returns>
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) => 
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
+                
     }
 }

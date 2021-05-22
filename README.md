@@ -1,8 +1,6 @@
 # SProfTIAPI - Seletor de Profissinais de TI API
 # ASP.NET Core 3.1 Server
 
-
-
 Para deploy/execução da Aplicação seguir os seguites paços.
 
 >> Execução da solução a aprtir de um ambiente para desenvolvimento
@@ -15,7 +13,7 @@ Para deploy/execução da Aplicação seguir os seguites paços.
 - Abrir solução no VS Code. Deverá ser aberta na pasta "raiz" onde foi extraida a solução clonada
 - Executar o arquivo buildandRun.bat ou os seguintes comandos a partir da pasta SprofTIAPI\
 dotnet clean  src\SProfTIAPI
-dotnet restore src\SProfTIAPI
+dotnet restore src\SProfTIAPI 
 dotnet build src\SProfTIAPI
 cd src\SProfTIAPI
 dotnet run
