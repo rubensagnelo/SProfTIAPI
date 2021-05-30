@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.30330.147
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SProfTIAPI", "src\SProfTIAPI\SProfTIAPI.csproj", "{4982C356-79BF-427F-949C-49DFC2FD503E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SprofTI.Infrastructure", "src\SProfTIAPI\Infrastructure\SprofTI.Infrastructure\SprofTI.Infrastructure.csproj", "{7FCCECA7-A03D-4D08-92D0-9D2E95CCC3CE}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
